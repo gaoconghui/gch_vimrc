@@ -1,0 +1,46 @@
+" vundle  {{{
+	filetype off
+	set rtp+=~/.vim/bundle/vundle
+	call vundle#rc()
+	Bundle 'gmarik/vundle'
+" }}}
+
+" 自动补全{{{
+	Bundle 'Valloric/YouCompleteMe'
+	Bundle 'SirVer/ultisnips'
+	Bundle 'honza/vim-snippets'
+    "Bundle 'ervandew/supertab'
+" }}}
+
+" python {{{
+	 Bundle 'klen/python-mode'
+     "Bundle 'yssource/python.vim'
+     "Bundle 'python_match.vim'
+     "Bundle 'pythoncomplete'
+" }}}
+
+" golang {{{
+    Bundle 'fatih/vim-go'
+" }}}
+
+" xml {{{
+    Bundle 'othree/xml.vim'
+" }}}
+
+" 其他{{{
+	Bundle "scrooloose/nerdtree"
+    Bundle 'jistr/vim-nerdtree-tabs'
+    Bundle "tmhedberg/SimpylFold"
+    " 括号自动补全
+    Bundle 'jiangmiao/auto-pairs'
+    " 大纲式导航
+    Bundle 'majutsushi/tagbar'
+    " 彩虹括号
+    Bundle 'luochen1990/rainbow'
+    " 配色方案
+    Bundle 'fatih/molokai'
+    " 文件搜索
+    Bundle 'ctrlpvim/ctrlp.vim'
+    " 快速注释
+    Bundle 'scrooloose/nerdcommenter'
+" }}}
