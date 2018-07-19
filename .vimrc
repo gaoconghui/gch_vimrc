@@ -32,16 +32,15 @@
     set report      =0         " Always report changed lines.
     set synmaxcol   =200       " Only highlight the first 200 columns.
 
-    "set list                   " Show non-printable characters.
     set mouse=a
-    " 显示行号
-    set number 
-    "set ruler
+    " 居中 
     set so=999
+    " 显示行号
+    set number
     " display completion matches in status line
     set wildmenu
 
-    set statusline=%f\ \-\ %l/%L
+    " 不同文件类型插件采用不同的缩进
     filetype plugin indent on
 
     if has('multi_byte') && &encoding ==# 'utf-8'
@@ -58,9 +57,16 @@
     set foldlevel=99
     " 语法高亮
     syntax on
+
+    set lazyredraw
+    set ttyfast
+    set re=1
     let c_comment_strings=1
 " }}}
 
+" 保存折叠
+"au BufWinLeave * silent  mkview
+"au BufWinEnter * silent loadview
 " 快捷键映射 {{{ 
     nnoremap <space> za
     " 补全<CR>确认
@@ -120,15 +126,16 @@
 	
 	" Python {{{
 	    if isdirectory(expand("~/.vim/bundle/python-mode"))
-			let g:pymode = 1
-			" 使用python2
-			let g:pymode_python = 'python'	
-			let g:pymode_indent = 1
+            let g:pymode = 1
+             "使用python2
+            let g:pymode_python = 'python'	
+            let g:pymode_indent = 1
 
-            let g:pymode_rope_goto_definition_bind = 'gw'
-            let g:pymode_rope_goto_definition_cmd = 'new'
+            let g:pymode_rope_goto_definition_bind = "<C-]>"
+
             " ,f设置为format
             au FileType python nmap <leader>f :PymodeLintAuto<CR>
+
     	endif
 	" }}}
 
@@ -143,6 +150,7 @@
             let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
             let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
             let g:go_def_reuse_buffer = 0
+            let g:go_def_mode = "guru"
 
             augroup filetype_go
                 au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -201,7 +209,54 @@
         endif
     " }}}
 
+    " undotree{{{
+        if isdirectory(expand("~/.vim/bundle/undotree"))
+            nnoremap <leader>u :UndotreeToggle<cr>
+        endif
+    " }}}
+
 " }}}
+
+" 一些功能 需要额外函数辅助{{{
+" 保存上次退出状态（光标位置，折叠等{{{
+        "if exists("g:loaded_restore_view")
+            "finish
+    "endif
+    "let g:loaded_restore_view = 1
+
+    "if !exists("g:skipview_files")
+        "let g:skipview_files = []
+    "endif
+
+    "function! MakeViewCheck()
+        "if &l:diff | return 0 | endif
+        "if &buftype != '' | return 0 | endif
+        "if expand('%') =~ '\[.*\]' | return 0 | endif
+        "if empty(glob(expand('%:p'))) | return 0 | endif
+        "if &modifiable == 0 | return 0 | endif
+        "if len($TEMP) && expand('%:p:h') == $TEMP | return 0 | endif
+        "if len($TMP) && expand('%:p:h') == $TMP | return 0 | endif
+
+        "let file_name = expand('%:p')
+        "for ifiles in g:skipview_files
+            "if file_name =~ ifiles
+                "return 0
+            "endif
+        "endfor
+
+        "return 1
+    "endfunction
+
+    "augroup AutoView
+        "autocmd!
+        "" Autosave & Load Views.
+        "autocmd BufWritePre,BufWinLeave ?* if MakeViewCheck() | silent! mkview | endif
+        "autocmd BufWinEnter ?* if MakeViewCheck() | silent! loadview | endif
+    "augroup END
+
+" }}}
+" }}}
+
 
 " 键位映射 {{{
 " 	 切换窗口
@@ -224,6 +279,7 @@
 
         " 退出insert mode
         inoremap jk <esc>
+        inoremap kj <esc>
     " }}}
 
     " 快速打开vimrc 以及快速生效

@@ -14,9 +14,9 @@
 
 " python {{{
 	 Bundle 'klen/python-mode'
-     "Bundle 'yssource/python.vim'
-     "Bundle 'python_match.vim'
-     "Bundle 'pythoncomplete'
+     Bundle 'yssource/python.vim'
+     Bundle 'python_match.vim'
+     Bundle 'pythoncomplete'
 " }}}
 
 " golang {{{
@@ -33,6 +33,9 @@
     Bundle "tmhedberg/SimpylFold"
     " 括号自动补全
     Bundle 'jiangmiao/auto-pairs'
+   
+    " ds" 删除"的环绕    cs"' 把"的环绕改为'
+    Bundle 'tpope/vim-surround'
     " 大纲式导航
     Bundle 'majutsushi/tagbar'
     " 彩虹括号
@@ -43,4 +46,8 @@
     Bundle 'ctrlpvim/ctrlp.vim'
     " 快速注释
     Bundle 'scrooloose/nerdcommenter'
+    " statusline
+    Bundle 'itchyny/lightline.vim'
+    " undo tree  ,u
+    Bundle 'mbbill/undotree'
 " }}}
