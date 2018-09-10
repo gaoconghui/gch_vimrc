@@ -37,10 +37,14 @@
     set so=999
     " 显示行号
     set number
-    " display completion matches in status line
+    " vim 自身命令行只能补全
     set wildmenu
+    " 搜索时大小写不敏感
+    set ignorecase
+    set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 
     " 不同文件类型插件采用不同的缩进
+    "ctags --list-languages
     filetype plugin indent on
 
     if has('multi_byte') && &encoding ==# 'utf-8'
@@ -139,6 +143,10 @@
     	endif
 	" }}}
 
+    " c++ {{{
+        let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+    " }}}
+    
     " GoLang {{{
         if isdirectory(expand("~/.vim/bundle/vim-go")) 
             let g:go_highlight_functions = 1
@@ -285,6 +293,9 @@
     " 快速打开vimrc 以及快速生效
     nnoremap <leader>ev :vsplit $MYVIMRC<cr>
     nnoremap <leader>sv :source $MYVIMRC<cr>
+
+    " 设置快捷键将选中文本块复制至系统剪贴板
+    vnoremap <leader>y "+y
 
 " }}}
 
